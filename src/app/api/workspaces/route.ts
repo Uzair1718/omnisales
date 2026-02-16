@@ -10,7 +10,7 @@ export async function GET() {
 export async function POST(req: Request) {
     try {
         const { id, name, division } = await req.json();
-        const workspaces = getWorkspaces();
+        const workspaces = await getWorkspaces();
 
         const newWorkspace: Workspace = {
             id: id || `ws-${Date.now()}`,

@@ -8,8 +8,8 @@ export async function POST(req: NextRequest) {
         const { message, history } = await req.json();
 
         // 1. Gather Context
-        const leads = getLeads();
-        const config = getConfig();
+        const leads = await getLeads();
+        const config = await getConfig();
 
         // Summarize leads for context window (avoid huge payload)
         const stats = {

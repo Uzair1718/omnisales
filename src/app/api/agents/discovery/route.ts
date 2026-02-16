@@ -117,7 +117,7 @@ export async function runDiscoveryTask(options?: DiscoveryOptions & { workspaceI
         throw new Error('Workspace ID required for discovery task');
     }
 
-    const config = getConfig(workspaceId);
+    const config = await getConfig(workspaceId);
     const agent = new DiscoveryAgent();
 
     // Determine target sets - either from options or from global config
@@ -127,7 +127,7 @@ export async function runDiscoveryTask(options?: DiscoveryOptions & { workspaceI
     const targetCities = options?.city ? [options.city] : config.icp.locations || [];
 
     let totalNewLeads = 0;
-    const leadsReference = getLeads(workspaceId);
+    const leadsReference = await getLeads(workspaceId);
     const MAX_LEADS_PER_CYCLE = 20;
 
     console.log(`--- [WS: ${workspaceId}] Discovery Started: Targeting ${targetIndustries.length} Industries across ${targetCountries.length} Countries ---`);

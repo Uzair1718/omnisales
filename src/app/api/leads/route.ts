@@ -12,7 +12,7 @@ export async function GET(req: Request) {
             return NextResponse.json({ error: 'Workspace ID required' }, { status: 400 });
         }
 
-        const leads = getLeads(workspaceId);
+        const leads = await getLeads(workspaceId);
         return NextResponse.json(leads);
     } catch (error) {
         return NextResponse.json({ error: 'Failed to fetch leads' }, { status: 500 });

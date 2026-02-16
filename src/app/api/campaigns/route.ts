@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import { getLeads } from '@/lib/db';
 
 export async function GET() {
-    const leads = getLeads();
+    const leads = await getLeads();
 
     // Group leads by industry to simulate campaigns
     const industryGroups = leads.reduce((acc: any, lead) => {
