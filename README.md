@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OmniSales AI - Universal Sales & Marketing Automation System
 
-## Getting Started
+OmniSales AI is a fully configurable, multi-agent autonomous system designed to find, qualify, and engage leads across ANY industry, geography, and profession worldwide including comprehensive coverage of Pakistan and all 195+ countries.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Autonomous Agents**:
+  - **Discovery**: Multi-source lead finding (DuckDuckGo, Google, Business Directories).
+  - **Research**: Deeper data enrichment and social media profiling.
+  - **Qualifier**: AI-based scoring and fit analysis using Gemini.
+  - **Outreach**: Multi-channel personalized engagement (Email, WhatsApp).
+  - **Closer**: Conversation management and discovery call booking.
+- **Command Center**: Chat with the system Supervisor (Gemini).
+- **Dashboard**: Live metrics and activity logs.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Install Dependencies** (if not already done):
+   ```bash
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Configure Environment**:
+   Create a `.env.local` file in the root directory:
+   ```bash
+   GEMINI_API_KEY=your_google_gemini_api_key_here
+   ```
 
-## Learn More
+3. **Run the System**:
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000).
 
-To learn more about Next.js, take a look at the following resources:
+## Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Go to **Agent Monitor** to start agents manually or enable "Autonomous Mode".
+2. View **Lead Pipeline** to see leads moving through stages.
+3. Use **Command Center** to ask questions about performance.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Architecture
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Frontend**: Next.js App Router (React Server Components).
+- **Styling**: Pure CSS (Glassmorphism theme) with CSS Modules.
+- **Database**: Local JSON file storage (`data/leads.json`).
+- **AI**: Google Gemini 1.5 Pro via Google AI SDK.
