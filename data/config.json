@@ -1,0 +1,41 @@
+{
+  "icp": {
+    "specialties": [
+      "Primary Care",
+      "Mental Health",
+      "Dental",
+      "Physical Therapy"
+    ],
+    "locations": [
+      "US"
+    ],
+    "minProviders": 3,
+    "maxProviders": 50
+  },
+  "agents": {
+    "RESEARCHER": {
+      "active": true,
+      "status": "IDLE",
+      "lastActive": "",
+      "logs": []
+    },
+    "QUALIFIER": {
+      "active": true,
+      "status": "IDLE",
+      "lastActive": "",
+      "logs": []
+    },
+    "OUTREACH": {
+      "active": true,
+      "status": "IDLE",
+      "lastActive": "",
+      "logs": []
+    },
+    "CLOSER": {
+      "active": true,
+      "status": "IDLE",
+      "lastActive": "",
+      "logs": []
+    }
+  }
+}

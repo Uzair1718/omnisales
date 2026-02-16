@@ -1,0 +1,190 @@
+.chatContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    z-index: 10;
+    background: transparent;
+}
+
+.messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    /* Add subtle scrollbar for internal list */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(139, 92, 246, 0.3) transparent;
+}
+
+.messageRow {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    max-width: 85%;
+    animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.userRow {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.assistantRow {
+    align-self: flex-start;
+}
+
+.avatar {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    width: 2.75rem;
+    height: 2.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+.userRow .avatar {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-color: #60a5fa;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+}
+
+.assistantRow .avatar {
+    background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+    border-color: #a78bfa;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+.bubble {
+    padding: 1.25rem 1.5rem;
+    border-radius: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #f1f5f9;
+    position: relative;
+    letter-spacing: 0.01em;
+}
+
+.userBubble {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    border-bottom-right-radius: 0.25rem;
+    box-shadow: 0 10px 30px -5px rgba(37, 99, 235, 0.4);
+    color: white;
+    font-weight: 500;
+}
+
+.assistantBubble {
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-bottom-left-radius: 0.25rem;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+}
+
+/* Typing Indicator Animation */
+.typingIndicator {
+    font-style: italic;
+    font-size: 0.85rem;
+    color: #a78bfa;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.8;
+}
+
+.typingIndicator::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #a78bfa;
+    animation: pulse 1s infinite;
+}
+
+.inputArea {
+    display: flex;
+    gap: 1rem;
+    padding: 2rem;
+    background: rgba(15, 23, 42, 0.8);
+    border-top: 1px solid rgba(139, 92, 246, 0.15);
+    backdrop-filter: blur(24px);
+    margin-top: auto;
+    /* Push to bottom */
+}
+
+.inputWrapper {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    width: 100%;
+    padding: 1.25rem 1.5rem;
+    padding-right: 4rem;
+    /* Space for icon */
+    border-radius: 1rem;
+    background-color: rgba(30, 41, 59, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+    font-size: 1rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.input:focus {
+    background-color: rgba(30, 41, 59, 0.8);
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+.sendButton {
+    background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 1rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+    margin-left: 0.5rem;
+}
+
+.sendButton:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.6);
+}
+
+.sendButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    background: #334155;
+}

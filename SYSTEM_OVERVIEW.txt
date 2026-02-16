@@ -1,0 +1,230 @@
+OMNISALES AI - UNIVERSAL SALES & MARKETING AUTOMATION SYSTEM
+SYSTEM OVERVIEW
+OmniSales AI is a fully configurable, multi-agent autonomous system designed to find, qualify, and engage leads across ANY industry, geography, and profession worldwide including comprehensive coverage of Pakistan and all 195+ countries. The system operates as a complete sales and marketing automation platform with intelligent targeting, personalization, and multi-channel outreach capabilities.
+
+1. AUTONOMOUS PIPELINE (The "Engine")
+The core orchestrates five specialized AI agents in sequence, with direct worker function calls to prevent server deadlocks during local development.
+PHASE 1: INTELLIGENT DISCOVERY AGENT
+Action: Multi-source lead discovery with advanced filtering and intelligent scraping across all industries and countries worldwide
+UNIVERSAL SEARCH CAPABILITIES:
+Multi-Source Search Engine Integration:
+- DuckDuckGo (global coverage, privacy-focused)
+- Google Custom Search API (195+ countries including Pakistan)
+- Bing Search API (international markets)
+- Yandex (Russia, CIS countries)
+- Baidu (China)
+- Regional search engines (Naver for Korea, Yahoo Japan, etc.)
+
+Business Directory Integration by Region:
+North America:
+- Yellow Pages (USA/Canada)
+- Yelp Business
+- Better Business Bureau
+- Chamber of Commerce directories
+
+Europe:
+- Yell.com (UK)
+- PagesJaunes (France)
+- Gelbe Seiten (Germany)
+- Pagine Gialle (Italy)
+- Companies House (UK)
+
+South Asia (Including Pakistan):
+- Pakwheels Business Directory (Pakistan)
+- OLX Pakistan Business Listings
+- Zameen.com Business Directory (Pakistan)
+- Pakistan Yellow Pages
+- Trade Development Authority of Pakistan (TDAP)
+- Chambers of Commerce (Karachi, Lahore, Islamabad, Rawalpindi)
+- IndiaMART (India)
+- TradeIndia (India)
+- Justdial (India/South Asia)
+- Bangladesh Yellow Pages
+- Sri Lanka Business Directory
+
+Asia-Pacific:
+- Alibaba (China)
+- Yellow Pages Australia
+- NZ Business Directory
+- Singapore Business Directory
+
+Middle East:
+- Dubizzle (UAE)
+- Yellow Pages Middle East
+- Saudi Business Directory
+
+Latin America:
+- Páginas Amarillas (Mexico, Argentina, Colombia)
+- Guia Mais (Brazil)
+- Mercado Libre Business Directory
+
+Africa:
+- Yellow Pages South Africa
+- Nigeria Business Directory
+- Kenya Business Directory
+
+COMPREHENSIVE GEOGRAPHIC TARGETING:
+Global Coverage Structure:
+WORLD (195+ Countries)
+├── NORTH AMERICA
+│   ├── United States (50 States + DC)
+│   ├── Canada (10 Provinces + 3 Territories)
+│   └── Mexico (32 States)
+│
+├── EUROPE
+│   ├── United Kingdom
+│   │   ├── England (London, Manchester, Birmingham, Leeds)
+│   │   ├── Scotland (Edinburgh, Glasgow)
+│   │   ├── Wales (Cardiff, Swansea)
+│   │   └── Northern Ireland (Belfast)
+│   ├── Germany (Berlin, Munich, Hamburg, Frankfurt)
+│   ├── France (Paris, Marseille, Lyon, Toulouse)
+│   ├── Italy (Rome, Milan, Naples, Turin)
+│   ├── Spain (Madrid, Barcelona, Valencia, Seville)
+│   └── [40+ European countries]
+│
+├── SOUTH ASIA ⭐ (INCLUDING PAKISTAN)
+│   ├── Pakistan 🇵🇰
+│   │   ├── Punjab
+│   │   │   ├── Lahore (Lahore Cantt, Model Town, DHA, Gulberg, Johar Town)
+│   │   │   ├── Rawalpindi (Saddar, Bahria Town, DHA, Satellite Town)
+│   │   │   ├── Faisalabad (Faisalabad City, Jinnah Colony)
+│   │   │   ├── Multan (Multan Cantt, Gulgasht Colony)
+│   │   │   ├── Gujranwala (City, Satellite Town)
+│   │   │   ├── Sialkot (City, Industrial Area)
+│   │   │   └── [30+ Punjab cities]
+│   │   ├── Sindh
+│   │   │   ├── Karachi (DHA, Clifton, Gulshan, North Nazimabad, Malir, Korangi, Saddar)
+│   │   │   ├── Hyderabad (Hyderabad City, Latifabad)
+│   │   │   ├── Sukkur
+│   │   │   └── [10+ Sindh cities]
+│   │   ├── Khyber Pakhtunkhwa (KPK)
+│   │   │   ├── Peshawar (Peshawar City, Hayatabad, University Town)
+│   │   │   ├── Abbottabad
+│   │   │   ├── Mardan
+│   │   │   ├── Swat (Mingora)
+│   │   │   └── [10+ KPK cities]
+│   │   ├── Balochistan
+│   │   │   ├── Quetta (Quetta City, Satellite Town)
+│   │   │   ├── Gwadar
+│   │   │   └── [5+ Balochistan cities]
+│   │   ├── Islamabad Capital Territory
+│   │   │   ├── Islamabad (Blue Area, F-6, F-7, F-8, F-10, G-6 to G-13, I-8 to I-10)
+│   │   │   └── [ICT sectors and zones]
+│   │   ├── Azad Jammu & Kashmir
+│   │   │   ├── Muzaffarabad
+│   │   │   └── Mirpur
+│   │   └── Gilgit-Baltistan
+│   │       ├── Gilgit
+│   │       └── Skardu
+│   ├── India
+│   │   ├── Mumbai, Delhi, Bangalore, Chennai, Hyderabad, Pune
+│   │   └── [28 states + 8 union territories]
+│   ├── Bangladesh (Dhaka, Chittagong, Sylhet)
+│   ├── Sri Lanka (Colombo, Kandy, Galle)
+│   ├── Nepal (Kathmandu, Pokhara)
+│   └── Maldives (Malé)
+│
+├── MIDDLE EAST
+│   ├── United Arab Emirates (Dubai, Abu Dhabi, Sharjah)
+│   ├── Saudi Arabia (Riyadh, Jeddah, Dammam, Mecca, Medina)
+│   ├── Qatar (Doha)
+│   ├── Kuwait (Kuwait City)
+│   ├── Bahrain (Manama)
+│   ├── Oman (Muscat)
+│   ├── Turkey (Istanbul, Ankara, Izmir)
+│   ├── Israel (Tel Aviv, Jerusalem)
+│   ├── Lebanon (Beirut)
+│   └── Jordan (Amman)
+│
+├── EAST & SOUTHEAST ASIA
+│   ├── China (Beijing, Shanghai, Shenzhen, Guangzhou)
+│   ├── Japan (Tokyo, Osaka, Kyoto, Yokohama)
+│   ├── South Korea (Seoul, Busan, Incheon)
+│   ├── Singapore
+│   ├── Malaysia (Kuala Lumpur, George Town, Johor Bahru)
+│   ├── Thailand (Bangkok, Chiang Mai, Phuket)
+│   ├── Indonesia (Jakarta, Surabaya, Bandung)
+│   ├── Vietnam (Ho Chi Minh City, Hanoi, Da Nang)
+│   ├── Philippines (Manila, Cebu, Davao)
+│   └── [15+ Asia-Pacific countries]
+│
+├── OCEANIA
+│   ├── Australia (Sydney, Melbourne, Brisbane, Perth, Adelaide)
+│   ├── New Zealand (Auckland, Wellington, Christchurch)
+│   └── Pacific Islands
+│
+├── LATIN AMERICA
+│   ├── Brazil (São Paulo, Rio de Janeiro, Brasília, Salvador)
+│   ├── Mexico (Mexico City, Guadalajara, Monterrey)
+│   ├── Argentina (Buenos Aires, Córdoba, Rosario)
+│   ├── Colombia (Bogotá, Medellín, Cali)
+│   ├── Chile (Santiago, Valparaíso)
+│   ├── Peru (Lima, Cusco)
+│   └── [20+ Latin American countries]
+│
+├── AFRICA
+│   ├── South Africa (Johannesburg, Cape Town, Durban, Pretoria)
+│   ├── Nigeria (Lagos, Abuja, Kano, Ibadan)
+│   ├── Egypt (Cairo, Alexandria, Giza)
+│   ├── Kenya (Nairobi, Mombasa)
+│   ├── Morocco (Casablanca, Rabat, Marrakech)
+│   ├── Ghana (Accra, Kumasi)
+│   └── [54 African countries]
+│
+└── CENTRAL ASIA & CIS
+    ├── Kazakhstan (Almaty, Nur-Sultan)
+    ├── Uzbekistan (Tashkent, Samarkand)
+    ├── Turkmenistan, Kyrgyzstan, Tajikistan
+    └── Afghanistan (Kabul, Kandahar, Herat)
+
+COMPLETE INDUSTRY TAXONOMY (ALL COUNTRIES INCLUDING PAKISTAN):
+1. HEALTHCARE & MEDICAL 🏥
+2. PROFESSIONAL SERVICES 💼
+3. TECHNOLOGY & SOFTWARE 💻
+4. E-COMMERCE & RETAIL 🛒
+5. REAL ESTATE 🏠
+6. EDUCATION & TRAINING 📚
+7. HOME SERVICES 🔧
+8. HOSPITALITY & FOOD SERVICE 🍽️
+9. MANUFACTURING & INDUSTRIAL 🏭
+10. AUTOMOTIVE 🚗
+11. FINANCIAL SERVICES 💰
+12. FITNESS & WELLNESS 💪
+13. BEAUTY & PERSONAL CARE 💇
+14. WEDDING & EVENT SERVICES 💒
+15. TRANSPORTATION & LOGISTICS 🚚
+16. AGRICULTURE & FARMING 🌾
+17. TRAVEL & TOURISM ✈️
+18. LEGAL & IMMIGRATION SERVICES ⚖️
+19. MEDIA & ADVERTISING 📺
+20. SECURITY SERVICES 🛡️
+
+PAKISTAN-SPECIFIC SEARCH INTELLIGENCE
+Language & Search Adaptation for Pakistan:
+Primary Language: English (business standard)
+Secondary Language: Urdu (اردو)
+Regional Languages: Punjabi, Sindhi, Pashto (for local targeting)
+
+Pakistan Business Directories & Data Sources:
+- Pakistan Yellow Pages (pakpages.com)
+- OLX Pakistan (olx.com.pk) - Business section
+- Zameen.com - Real estate and commercial
+- PakWheels - Automotive
+- Rozee.pk - Company listings
+
+Email Patterns: info@company.pk, contact@company.com.pk, business@company.pk
+Phone Number Formats: +92 3XX XXXXXXX (Mobile), +92 XX XXXXXXXX (Landline)
+WhatsApp Business: Primary communication channel in Pakistan.
+
+UNIVERSAL SYSTEM FEATURES FOR ALL COUNTRIES
+- Multi-Currency Support (USD, PKR, INR, etc.)
+- Multi-Language Email Templates (50+ languages)
+- Cultural Intelligence System (Regional communication styles)
+- Global Infrastructure (AWS/Cloudflare)
+- Compliance & Data Privacy (GDPR, PECA 2016)
+
+PRICING FOR PAKISTAN & GLOBAL MARKETS
+Global: Starter ($99), Professional ($299), Agency ($599)
+Pakistan: Starter (PKR 27,500), Professional (PKR 83,500), Agency (PKR 167,500)
+Local payment methods: Bank Transfer, JazzCash, Easypaisa.

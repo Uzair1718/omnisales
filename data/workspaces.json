@@ -1,0 +1,192 @@
+[
+  {
+    "id": "all-care",
+    "name": "All Care MBS",
+    "division": "Healthcare Division",
+    "config": {
+      "icp": {
+        "industries": [
+          "Healthcare & Medical"
+        ],
+        "specialties": [
+          "DNP Clinics",
+          "Nurse Practitioner Private Practices",
+          "PMHNP Private Practice",
+          "FNP-C Private Practice",
+          "Psychiatry",
+          "Primary Care",
+          "Mental Health",
+          "Physical Therapy"
+        ],
+        "locations": [
+          "Texas",
+          "Florida",
+          "California",
+          "New York",
+          "US"
+        ],
+        "countries": [
+          "United States"
+        ],
+        "sub_industries": [
+          "Advanced Practice Providers",
+          "Medical Practices & Clinics",
+          "Specialized Healthcare Services",
+          "Dental Practices"
+        ],
+        "minProviders": 1,
+        "maxProviders": 30
+      },
+      "agents": {
+        "DISCOVERY": {
+          "active": true,
+          "status": "IDLE",
+          "lastActive": "",
+          "logs": []
+        },
+        "RESEARCHER": {
+          "active": true,
+          "status": "IDLE",
+          "lastActive": "",
+          "logs": []
+        },
+        "QUALIFIER": {
+          "active": true,
+          "status": "IDLE",
+          "lastActive": "",
+          "logs": []
+        },
+        "OUTREACH": {
+          "active": true,
+          "status": "IDLE",
+          "lastActive": "",
+          "logs": []
+        },
+        "CLOSER": {
+          "active": true,
+          "status": "IDLE",
+          "lastActive": "",
+          "logs": []
+        }
+      },
+      "outreach": {
+        "activeChannels": [
+          "EMAIL"
+        ],
+        "emailSettings": {
+          "senderName": "Aban Gul",
+          "senderEmail": "muzairshafiq@gmail.com",
+          "templates": [
+            {
+              "id": "healthcare-revenue-optimization",
+              "name": "DNP/NP Revenue Case Study",
+              "subject": "{{firstName}}, Recover $30K+ in Missed Revenue for {{practiceName}}",
+              "body": "Hi {{firstName}},\n\nI came across {{practiceName}} while researching outstanding DNP-led practices in {{city}}, and I was impressed by your {{specialtyFocus}} approach.\n\nAs a fellow healthcare professional (working with 50+ nurse practitioner clinics), I know how overwhelming billing can become—especially when you're managing {{insuranceTypes}} claims while trying to focus on patient care.\n\nHere's what I'm seeing with DNP practices your size:\n→ 20-30% of revenue left on the table from denied claims\n→ 45-60 days in accounts receivable\n→ Claim denials averaging 15%+\n\nWe specialize exclusively in independent practices and have helped partners:\n✓ Increase collections by 32% (one partner recovered $47K in 90 days)\n✓ Cut A/R days from 55 to 28\n✓ Reduce claim denials to under 3%\n\nI don't want to take up much of your time, but if you're experiencing billing frustrations, I'd love to share a 3-minute case study relevant to {{specialty}}.\n\nWould Thursday at 2 PM or Friday at 10 AM work for a brief 15-minute discovery call?\n\nBest regards,\n\nAban Gul, Director\nAll Care MBS | Revenue Cycle Management\nDirect: (660) 282-8077"
+            }
+          ],
+          "smtpPassword": "axbwnswzfwpovwtd",
+          "smtpHost": "smtp.gmail.com"
+        },
+        "whatsappSettings": {
+          "phoneNumberId": "",
+          "accessToken": "",
+          "businessAccountId": ""
+        },
+        "linkedinSettings": {
+          "profileId": "",
+          "sessionCookie": ""
+        },
+        "dailyLimit": 100,
+        "followUpDays": 3,
+        "automationMode": "AUTONOMOUS"
+      }
+    }
+  },
+  {
+    "id": "ws-1771224027731",
+    "name": "madevolve",
+    "division": "Outreach Division",
+    "config": {
+      "icp": {
+        "industries": [
+          "Healthcare"
+        ],
+        "specialties": [
+          "Primary Care",
+          "Mental Health",
+          "Dental",
+          "Physical Therapy"
+        ],
+        "locations": [
+          "US",
+          "Pakistan"
+        ],
+        "countries": [
+          "United States",
+          "Pakistan"
+        ]
+      },
+      "agents": {
+        "DISCOVERY": {
+          "active": true,
+          "status": "IDLE",
+          "lastActive": "",
+          "logs": []
+        },
+        "RESEARCHER": {
+          "active": true,
+          "status": "IDLE",
+          "lastActive": "",
+          "logs": []
+        },
+        "QUALIFIER": {
+          "active": true,
+          "status": "IDLE",
+          "lastActive": "",
+          "logs": []
+        },
+        "OUTREACH": {
+          "active": true,
+          "status": "IDLE",
+          "lastActive": "",
+          "logs": []
+        },
+        "CLOSER": {
+          "active": true,
+          "status": "IDLE",
+          "lastActive": "",
+          "logs": []
+        }
+      },
+      "outreach": {
+        "activeChannels": [
+          "EMAIL"
+        ],
+        "emailSettings": {
+          "senderName": "OmniSales Agent",
+          "senderEmail": "sales@omnisales.ai",
+          "templates": [
+            {
+              "id": "welcome",
+              "name": "Initial Introduction",
+              "subject": "Strategic Partnership Inquiry",
+              "body": "Hi {{name}},\n\nI noticed your work at {{companyName}} and was impressed by your focus on {{industry}}.\n\nWe help companies like yours automate their sales pipeline. Would you be open to a 5-minute chat next week?\n\nBest,\nOmniSales Team"
+            }
+          ]
+        },
+        "whatsappSettings": {
+          "phoneNumberId": "",
+          "accessToken": "",
+          "businessAccountId": ""
+        },
+        "linkedinSettings": {
+          "profileId": "",
+          "sessionCookie": ""
+        },
+        "dailyLimit": 50,
+        "followUpDays": 3,
+        "automationMode": "AUTONOMOUS"
+      }
+    }
+  }
+]
