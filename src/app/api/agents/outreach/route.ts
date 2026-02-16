@@ -10,8 +10,8 @@ export async function runOutreachTask(options?: { workspaceId?: string }) {
         throw new Error('Workspace ID required for outreach task');
     }
 
-    const config = getConfig(workspaceId);
-    const leads = getLeads(workspaceId);
+    const config = await getConfig(workspaceId);
+    const leads = await getLeads(workspaceId);
 
     // Check if Email outreach is active
     if (!config.outreach.activeChannels.includes('EMAIL')) {
@@ -29,7 +29,7 @@ export async function runOutreachTask(options?: { workspaceId?: string }) {
 
     // Filter leads for outreach
     const targets = leads
-        .filter(l => l.status === 'QUALIFIED' && l.outreachCount === 0)
+        .filter((l: any) => l.status === 'QUALIFIED' && l.outreachCount === 0)
         .slice(0, dailyLimit);
 
     if (targets.length === 0) {
@@ -46,7 +46,7 @@ export async function runOutreachTask(options?: { workspaceId?: string }) {
         },
     });
 
-    const results = await Promise.all(targets.map(async (lead) => {
+    const results = await Promise.all(targets.map(async (lead: any) => {
         console.log(`[WS: ${workspaceId}] Generating outreach for: ${lead.companyName}`);
         // ... existing logic follows
 

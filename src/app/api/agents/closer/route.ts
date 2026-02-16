@@ -11,14 +11,14 @@ export async function runCloserTask(options?: { workspaceId?: string }) {
         throw new Error('Workspace ID required for closer task');
     }
 
-    const config = getConfig(workspaceId);
-    const leads = getLeads(workspaceId);
+    const config = await getConfig(workspaceId);
+    const leads = await getLeads(workspaceId);
 
     // In a real scenario, we'd also fetch the workspace metadata for the prompt
     // For now we use the config or defaults
     const senderName = config.outreach.emailSettings.senderName || 'Aban Gul';
 
-    const activeConversations = leads.filter(l =>
+    const activeConversations = leads.filter((l: any) =>
         l.status === 'CONVERSATION' &&
         (l.conversations || []).length > 0 &&
         l.conversations![l.conversations!.length - 1].role === 'user'
@@ -33,7 +33,7 @@ export async function runCloserTask(options?: { workspaceId?: string }) {
     for (const lead of activeConversations) {
         console.log(`[WS: ${workspaceId}] Closer Agent replying to: ${lead.companyName}`);
 
-        const historyText = lead.conversations!.map(m => `${m.role.toUpperCase()}: ${m.content}`).join('\n');
+        const historyText = lead.conversations!.map((m: any) => `${m.role.toUpperCase()}: ${m.content}`).join('\n');
 
         const prompt = `You are ${senderName}. You are following up with a lead who responded to your outreach.
   

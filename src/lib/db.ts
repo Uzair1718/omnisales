@@ -14,6 +14,14 @@ export async function getLeads(workspaceId?: string): Promise<Lead[]> {
 
         return leads.map(lead => ({
             ...lead,
+            website: lead.website ?? undefined,
+            linkedinUrl: lead.linkedinUrl ?? undefined,
+            location: lead.location ?? undefined,
+            city: lead.city ?? undefined,
+            country: lead.country ?? undefined,
+            industry: lead.industry ?? undefined,
+            specialty: lead.specialty ?? undefined,
+            status: lead.status as any,
             metadata: lead.metadata as any,
             decisionMaker: lead.decisionMaker as any,
             history: lead.history as any,
@@ -54,6 +62,14 @@ export async function getLead(id: string): Promise<Lead | undefined> {
 
         return {
             ...lead,
+            website: lead.website ?? undefined,
+            linkedinUrl: lead.linkedinUrl ?? undefined,
+            location: lead.location ?? undefined,
+            city: lead.city ?? undefined,
+            country: lead.country ?? undefined,
+            industry: lead.industry ?? undefined,
+            specialty: lead.specialty ?? undefined,
+            status: lead.status as any,
             metadata: lead.metadata as any,
             decisionMaker: lead.decisionMaker as any,
             history: lead.history as any,
@@ -140,6 +156,7 @@ export async function getWorkspaces(): Promise<Workspace[]> {
 
         return workspaces.map(ws => ({
             ...ws,
+            division: ws.division ?? '',
             config: ws.config as SystemConfig
         }));
     } catch (error) {
@@ -190,6 +207,7 @@ export async function getWorkspace(id: string): Promise<Workspace | undefined> {
 
         return {
             ...workspace,
+            division: workspace.division ?? '',
             config: workspace.config as SystemConfig
         };
     } catch (error) {

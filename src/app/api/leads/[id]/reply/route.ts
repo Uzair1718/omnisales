@@ -7,7 +7,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
         const { message } = await req.json();
         const { id } = await params;
 
-        const lead = getLead(id);
+        const lead = await getLead(id);
         if (!lead) return NextResponse.json({ error: 'Lead not found' }, { status: 404 });
 
         const newHistory = [
@@ -29,7 +29,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
             }
         ];
 
-        updateLead(id, {
+        await updateLead(id, {
             status: 'CONVERSATION',
             history: newHistory,
             conversations: newConversations,

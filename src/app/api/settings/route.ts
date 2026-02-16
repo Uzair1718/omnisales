@@ -5,7 +5,7 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const workspaceId = searchParams.get('workspaceId');
 
-    return NextResponse.json(getConfig(workspaceId || undefined));
+    return NextResponse.json(await getConfig(workspaceId || undefined));
 }
 
 export async function POST(req: Request) {
@@ -15,12 +15,12 @@ export async function POST(req: Request) {
         const newConfig = await req.json();
 
         if (workspaceId) {
-            saveWorkspaceConfig(workspaceId, newConfig);
+            await saveWorkspaceConfig(workspaceId, newConfig);
         } else {
             // Default behavior if no workspaceId provided
-            const workspaces = getWorkspaces();
+            const workspaces = await getWorkspaces();
             if (workspaces.length > 0) {
-                saveWorkspaceConfig(workspaces[0].id, newConfig);
+                await saveWorkspaceConfig(workspaces[0].id, newConfig);
             }
         }
 

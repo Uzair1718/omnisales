@@ -11,9 +11,9 @@ export async function runQualifyTask(options?: { workspaceId?: string }) {
         throw new Error('Workspace ID required for qualification task');
     }
 
-    const leads = getLeads(workspaceId);
+    const leads = await getLeads(workspaceId);
     // Qualify leads that are either NEW (just discovered) or RESEARCHING (enriched)
-    const pendingLeads = leads.filter(l => l.status === 'NEW' || l.status === 'RESEARCHING');
+    const pendingLeads = leads.filter((l: any) => l.status === 'NEW' || l.status === 'RESEARCHING');
 
     if (pendingLeads.length === 0) {
         return { message: `No leads to qualify in workspace ${workspaceId}`, count: 0 };
