@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id              String   @id @default(cuid())
+  workspaceId     String
+  companyName     String
+  website         String?
+  linkedinUrl     String?
+  location        String?
+  city            String?
+  country         String?
+  industry        String?
+  specialty       String?
+  status          String   @default("NEW")
+  score           Int      @default(0)
+  outreachCount   Int      @default(0)
+  metadata        Json?
+  decisionMaker   Json?
+  history         Json?
+  conversations   Json?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  workspace       Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId])
+  @@index([status])
+  @@index([website])
+}
+
+model Workspace {
+  id        String   @id
+  name      String
+  division  String?
+  config    Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  leads     Lead[]
+}

@@ -1,130 +1,150 @@
-
-import fs from 'fs';
-import path from 'path';
+import { prisma } from './prisma';
 import { Lead, SystemConfig, Workspace } from './types';
 
-const DATA_DIR = path.join(process.cwd(), 'data');
-const LEADS_FILE = path.join(DATA_DIR, 'leads.json');
-const CONFIG_FILE = path.join(DATA_DIR, 'config.json');
-const WORKSPACES_FILE = path.join(DATA_DIR, 'workspaces.json');
+// ============================================
+// LEADS
+// ============================================
 
-function ensureDataDir() {
-    if (!fs.existsSync(DATA_DIR)) {
-        fs.mkdirSync(DATA_DIR, { recursive: true });
-    }
-}
-
-export function getLeads(workspaceId?: string): Lead[] {
-    ensureDataDir();
-    if (!fs.existsSync(LEADS_FILE)) {
-        return [];
-    }
-    const data = fs.readFileSync(LEADS_FILE, 'utf-8');
+export async function getLeads(workspaceId?: string): Promise<Lead[]> {
     try {
-        const leads: Lead[] = JSON.parse(data);
-        if (workspaceId) {
-            return leads.filter(l => l.workspaceId === workspaceId);
-        }
-        return leads;
-    } catch {
+        const leads = await prisma.lead.findMany({
+            where: workspaceId ? { workspaceId } : undefined,
+            orderBy: { createdAt: 'desc' }
+        });
+
+        return leads.map(lead => ({
+            ...lead,
+            metadata: lead.metadata as any,
+            decisionMaker: lead.decisionMaker as any,
+            history: lead.history as any,
+            conversations: lead.conversations as any,
+        }));
+    } catch (error) {
+        console.error('Error fetching leads:', error);
         return [];
     }
 }
 
-export function saveLeads(leads: Lead[], workspaceId?: string) {
-    ensureDataDir();
+export async function saveLeads(leads: Lead[], workspaceId?: string) {
+    // This function is kept for backward compatibility but we'll use addLead/updateLead instead
+    console.warn('saveLeads is deprecated, use addLead or updateLead instead');
+}
 
-    let allLeads: Lead[] = [];
-    if (fs.existsSync(LEADS_FILE)) {
-        try {
-            allLeads = JSON.parse(fs.readFileSync(LEADS_FILE, 'utf-8'));
-        } catch {
-            allLeads = [];
+export async function clearLeads(workspaceId?: string) {
+    try {
+        if (workspaceId) {
+            await prisma.lead.deleteMany({
+                where: { workspaceId }
+            });
+        } else {
+            await prisma.lead.deleteMany();
         }
-    }
-
-    if (workspaceId) {
-        // Replace only the leads for this workspace
-        allLeads = [
-            ...allLeads.filter(l => l.workspaceId !== workspaceId),
-            ...leads.map(l => ({ ...l, workspaceId }))
-        ];
-    } else {
-        // Fallback for global save (use with caution)
-        allLeads = leads;
-    }
-
-    fs.writeFileSync(LEADS_FILE, JSON.stringify(allLeads, null, 2), 'utf-8');
-}
-
-export function clearLeads(workspaceId?: string) {
-    ensureDataDir();
-    if (workspaceId) {
-        const allLeads = getLeads();
-        const filteredLeads = allLeads.filter(l => l.workspaceId !== workspaceId);
-        fs.writeFileSync(LEADS_FILE, JSON.stringify(filteredLeads, null, 2), 'utf-8');
-    } else if (fs.existsSync(LEADS_FILE)) {
-        fs.unlinkSync(LEADS_FILE);
+    } catch (error) {
+        console.error('Error clearing leads:', error);
     }
 }
 
-export function getLead(id: string): Lead | undefined {
-    const leads = getLeads();
-    return leads.find(l => l.id === id);
-}
+export async function getLead(id: string): Promise<Lead | undefined> {
+    try {
+        const lead = await prisma.lead.findUnique({
+            where: { id }
+        });
 
-export function addLead(lead: Lead, workspaceId: string) {
-    const allLeads = getLeads();
-    // check duplicate by linkedin or website WITHIN the same workspace
-    const existing = allLeads.find(l =>
-        l.workspaceId === workspaceId && (
-            (lead.linkedinUrl && l.linkedinUrl === lead.linkedinUrl) ||
-            (lead.website && l.website === lead.website)
-        )
-    );
+        if (!lead) return undefined;
 
-    if (existing) {
-        // update existing
-        Object.assign(existing, lead);
-        existing.workspaceId = workspaceId; // Ensure workspaceId is set correctly
-    } else {
-        lead.workspaceId = workspaceId;
-        allLeads.push(lead);
-    }
-    fs.writeFileSync(LEADS_FILE, JSON.stringify(allLeads, null, 2), 'utf-8');
-}
-
-export function updateLead(id: string, updates: Partial<Lead>) {
-    const leads = getLeads();
-    const index = leads.findIndex(l => l.id === id);
-    if (index !== -1) {
-        leads[index] = { ...leads[index], ...updates };
-        saveLeads(leads);
+        return {
+            ...lead,
+            metadata: lead.metadata as any,
+            decisionMaker: lead.decisionMaker as any,
+            history: lead.history as any,
+            conversations: lead.conversations as any,
+        };
+    } catch (error) {
+        console.error('Error fetching lead:', error);
+        return undefined;
     }
 }
 
-export function getWorkspaces(): Workspace[] {
-    ensureDataDir();
-    if (!fs.existsSync(WORKSPACES_FILE)) {
-        // Migration or initialize
-        if (fs.existsSync(CONFIG_FILE)) {
-            const oldConfigData = fs.readFileSync(CONFIG_FILE, 'utf-8');
-            let oldConfig: SystemConfig;
-            try {
-                oldConfig = JSON.parse(oldConfigData);
-            } catch {
-                oldConfig = getDefaultConfig();
+export async function addLead(lead: Lead, workspaceId: string) {
+    try {
+        // Check for existing lead by website or linkedinUrl
+        const existing = await prisma.lead.findFirst({
+            where: {
+                workspaceId,
+                OR: [
+                    lead.website ? { website: lead.website } : {},
+                    lead.linkedinUrl ? { linkedinUrl: lead.linkedinUrl } : {},
+                ].filter(obj => Object.keys(obj).length > 0)
             }
-            const defaultWorkspace: Workspace = {
-                id: 'all-care',
-                name: 'All Care MBS',
-                division: 'Healthcare Division',
-                config: oldConfig
-            };
-            const workspaces = [defaultWorkspace];
-            saveWorkspaces(workspaces);
-            return workspaces;
+        });
+
+        if (existing) {
+            // Update existing lead
+            await prisma.lead.update({
+                where: { id: existing.id },
+                data: {
+                    ...lead,
+                    workspaceId,
+                    metadata: lead.metadata as any,
+                    decisionMaker: lead.decisionMaker as any,
+                    history: lead.history as any,
+                    conversations: lead.conversations as any,
+                }
+            });
+        } else {
+            // Create new lead
+            await prisma.lead.create({
+                data: {
+                    ...lead,
+                    workspaceId,
+                    metadata: lead.metadata as any,
+                    decisionMaker: lead.decisionMaker as any,
+                    history: lead.history as any,
+                    conversations: lead.conversations as any,
+                }
+            });
         }
+    } catch (error) {
+        console.error('Error adding lead:', error);
+        throw error;
+    }
+}
+
+export async function updateLead(id: string, updates: Partial<Lead>) {
+    try {
+        await prisma.lead.update({
+            where: { id },
+            data: {
+                ...updates,
+                metadata: updates.metadata as any,
+                decisionMaker: updates.decisionMaker as any,
+                history: updates.history as any,
+                conversations: updates.conversations as any,
+            }
+        });
+    } catch (error) {
+        console.error('Error updating lead:', error);
+        throw error;
+    }
+}
+
+// ============================================
+// WORKSPACES
+// ============================================
+
+export async function getWorkspaces(): Promise<Workspace[]> {
+    try {
+        const workspaces = await prisma.workspace.findMany({
+            orderBy: { createdAt: 'desc' }
+        });
+
+        return workspaces.map(ws => ({
+            ...ws,
+            config: ws.config as SystemConfig
+        }));
+    } catch (error) {
+        console.error('Error fetching workspaces:', error);
+        // Return default workspace if database fails
         return [
             {
                 id: 'all-care',
@@ -134,35 +154,64 @@ export function getWorkspaces(): Workspace[] {
             }
         ];
     }
-    const data = fs.readFileSync(WORKSPACES_FILE, 'utf-8');
+}
+
+export async function saveWorkspaces(workspaces: Workspace[]) {
     try {
-        return JSON.parse(data);
-    } catch {
-        return [];
+        for (const workspace of workspaces) {
+            await prisma.workspace.upsert({
+                where: { id: workspace.id },
+                update: {
+                    name: workspace.name,
+                    division: workspace.division,
+                    config: workspace.config as any
+                },
+                create: {
+                    id: workspace.id,
+                    name: workspace.name,
+                    division: workspace.division,
+                    config: workspace.config as any
+                }
+            });
+        }
+    } catch (error) {
+        console.error('Error saving workspaces:', error);
+        throw error;
     }
 }
 
-export function saveWorkspaces(workspaces: Workspace[]) {
-    ensureDataDir();
-    fs.writeFileSync(WORKSPACES_FILE, JSON.stringify(workspaces, null, 2), 'utf-8');
-}
+export async function getWorkspace(id: string): Promise<Workspace | undefined> {
+    try {
+        const workspace = await prisma.workspace.findUnique({
+            where: { id }
+        });
 
-export function getWorkspace(id: string): Workspace | undefined {
-    const workspaces = getWorkspaces();
-    return workspaces.find(w => w.id === id);
-}
+        if (!workspace) return undefined;
 
-export function saveWorkspaceConfig(id: string, config: SystemConfig) {
-    const workspaces = getWorkspaces();
-    const index = workspaces.findIndex(w => w.id === id);
-    if (index !== -1) {
-        workspaces[index].config = config;
-        saveWorkspaces(workspaces);
+        return {
+            ...workspace,
+            config: workspace.config as SystemConfig
+        };
+    } catch (error) {
+        console.error('Error fetching workspace:', error);
+        return undefined;
     }
 }
 
-export function getConfig(workspaceId?: string): SystemConfig {
-    const workspaces = getWorkspaces();
+export async function saveWorkspaceConfig(id: string, config: SystemConfig) {
+    try {
+        await prisma.workspace.update({
+            where: { id },
+            data: { config: config as any }
+        });
+    } catch (error) {
+        console.error('Error saving workspace config:', error);
+        throw error;
+    }
+}
+
+export async function getConfig(workspaceId?: string): Promise<SystemConfig> {
+    const workspaces = await getWorkspaces();
     let config: SystemConfig;
 
     if (workspaceId) {
@@ -172,7 +221,7 @@ export function getConfig(workspaceId?: string): SystemConfig {
         config = workspaces[0]?.config || getDefaultConfig();
     }
 
-    // Deep merge or at least ensure top-level blocks exist to avoid crashes
+    // Deep merge with defaults
     const defaults = getDefaultConfig();
     return {
         ...defaults,
@@ -234,9 +283,9 @@ export function getDefaultConfig(): SystemConfig {
     };
 }
 
-export function saveConfig(config: SystemConfig) {
-    const workspaces = getWorkspaces();
+export async function saveConfig(config: SystemConfig) {
+    const workspaces = await getWorkspaces();
     if (workspaces.length > 0) {
-        saveWorkspaceConfig(workspaces[0].id, config);
+        await saveWorkspaceConfig(workspaces[0].id, config);
     }
 }
